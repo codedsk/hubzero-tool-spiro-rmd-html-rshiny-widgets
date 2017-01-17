@@ -1,0 +1,46 @@
+---
+title: "Fun with Spirographs"
+runtime: shiny
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+The spirograph equation for three of more wheels can be generalized as follows:
+
+$$z(t) = \sum_{k=1}^n a_k e^{i2\pi(n_kt+\theta_k)}$$
+
+This program solves those equations for three wheels, assuming all of the $a$ coefficients are 1 and $\theta$ coefficients are 0. Find more details online at <http://linuxgazette.net/133/luana.html>.
+
+
+```{r echo=FALSE}
+# http://rmarkdown.rstudio.com/authoring_embedded_shiny.html
+# http://rmarkdown.rstudio.com/authoring_shiny.html
+
+library(shiny)
+
+spiro <- function(n1,n2,n3) {
+  t <- seq(0,1,length.out=1000)
+  z <- exp(1i*2*pi*n1*t) + exp(1i*2*pi*n2*t) + exp(1i*2*pi*n3*t)
+  result <- data.frame(x=Re(z),y=Im(z))
+  return (result)
+}
+
+# Shiny Widgets, no shiny app.
+# checkout the k-means clustering widget for hints
+# on how to put these three inputs on the same row.
+
+sliderInput(inputId="n1",label="n1",value=13,min=-10,max=20,step=1)
+sliderInput(inputId="n2",label="n2",value=-7,min=-10,max=20,step=1)
+sliderInput(inputId="n3",label="n3",value=-3,min=-10,max=20,step=1)
+
+renderPlot({
+  result <- spiro(input$n1,input$n2,input$n3)
+  plot(result,type="l")
+})
+
+```
+
