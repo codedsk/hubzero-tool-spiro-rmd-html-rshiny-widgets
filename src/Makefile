@@ -4,13 +4,13 @@ all:
 
 install:
 	install --mode 0444 -D runRMarkdown.R ${BINDIR}/runRMarkdown.R
-	install --mode 0444 -D spirograph.Rmd ${BINDIR}/spirograph.Rmd
+	install --mode 0444 -D spirograph_with_shiny_widgets.Rmd ${BINDIR}/spirograph_with_shiny_widgets.Rmd
 
 clean:
 
 distclean: clean
 	rm -rf ${BINDIR}/runRMarkdown.R
-	rm -rf ${BINDIR}/spirograph.Rmd
+	rm -rf ${BINDIR}/spirograph_with_shiny_widgets.Rmd
 
 .PHONY: all install clean distclean
 
