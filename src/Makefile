@@ -1,16 +1,16 @@
 BINDIR = ../bin
 
+RMDFILE = spirograph_with_shiny_widgets.Rmd
+
 all:
 
 install:
-	install --mode 0444 -D runRMarkdown.R ${BINDIR}/runRMarkdown.R
-	install --mode 0444 -D spirograph_with_shiny_widgets.Rmd ${BINDIR}/spirograph_with_shiny_widgets.Rmd
+	install --mode 0444 -D ${RMDFILE} ${BINDIR}/${RMDFILE}
 
 clean:
 
 distclean: clean
-	rm -rf ${BINDIR}/runRMarkdown.R
-	rm -rf ${BINDIR}/spirograph_with_shiny_widgets.Rmd
+	rm -rf ${BINDIR}/${RMDFILE}
 
 .PHONY: all install clean distclean
 
